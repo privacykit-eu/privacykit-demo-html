@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PrivacyKit demo page showing consent dialog, consent-guard, and consent-missing." />
+  <link rel="stylesheet" href="index.css">
+  <title>PrivacyKit HTML/SSR Demo</title>
+  <!-- Add PrivacyKit web components: consent-dialog, consent-guard, consent-missing -->
+  <script type="module" src="https://cdn.privacykit.eu/privacykit/privacykit.esm.js"></script>
+  <script nomodule defer src="https://cdn.privacykit.eu/privacykit/privacykit.js"></script>
+  <!-- Add PrivacyKit JavaScript API for frameworks like React and Vue and Plain JS (optional) -->
+  <script type="module" src="https://cdn.privacykit.eu/privacykit/index.esm.js"></script>
+</head>
+
+<body>
+  <noscript>This demo requires JavaScript to render the consent UI and run guarded scripts.</noscript>
+
+  <!-- Add consent-guard(s) to block/load 3rd party scripts -->
+  <consent-guard consent="marketing">
+    <script type="text/plain" data-src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX"></script>
+  </consent-guard>
+
+  <consent-guard consent="preferences">
+    <script type="text/plain">
+      window.preferencesScript = {
+        message: "Preferences script loaded.",
+      };
+    </script>
+  </consent-guard>
+  <consent-guard consent="analytics">
+    <script type="text/plain">
+      window.analyticsScript = {
+        message: "Analytics script loaded.",
+      };
+    </script>
+  </consent-guard>
+  <consent-guard consent="marketing">
+    <script type="text/plain">
+      window.marketingScript = {
+        message: "Marketing script loaded.",
+      };
+    </script>
+  </consent-guard>
+
+  <!-- Add consent-dialog -->
+  <consent-dialog variant="standard"></consent-dialog>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero__title">
+        <h1>Regulated Nut Supply</h1>
+        <p class="hero__subtitle">A GDPR-compliant company</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="section">
+      <div class="section__header">
+        <h2>PrivacyKit with HTML and JavaScript</h2>
+        <a class="icon-btn" href="https://github.com/privacykit-eu/privacykit-demo-html" target="_blank"
+          rel="noopener noreferrer" aria-label="View demo repository on GitHub" title="View on GitHub">
+          <span class="icon-btn__icon" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card__content card__title">
+          <h3>Test Panel</h3>
+          <span>Use these controls to manually test consent behavior — open the dialog, view the privacy policy, or wipe
+            all cookies to simulate a first-time visitor.</span>
+        </div>
+        <div class="card__content action-row">
+          <div class="action-row__group">
+            <button id="open-consent-dialog" class="btn btn--primary" type="button">Open Consent Dialog</button>
+            <button id="open-privacy-policy" class="btn btn--primary" type="button">Open Privacy Policy</button>
+          </div>
+          <div class="action-row__group">
+            <button id="delete-cookies" class="btn btn--danger" type="button">Delete Cookies</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card card__content" role="status" aria-live="polite">
+        <code>window.PrivacyKit.readConsent(): PrivacyKitConsentState</code>
+        <pre id="consent-state"></pre>
+      </div>
+
+      <div class="card card--terminal" id="preferences-card">
+        <div class="card__container card__content">
+          <pre class="pre-terminal" id="pre-preferences"></pre>
+          <button class="btn btn--secondary" type="button" id="try-preferences-btn-click">
+            Try It
+          </button>
+        </div>
+      </div>
+
+      <div class="card card--terminal" id="analytics-card">
+        <div class="card__container card__content">
+          <pre class="pre-terminal" id="pre-analytics"></pre>
+          <button class="btn btn--secondary" type="button" id="try-analytics-btn-click">
+            Try It
+          </button>
+        </div>
+      </div>
+
+      <div class="card card--terminal" id="marketing-card">
+        <div class="card__container card__content">
+          <pre class="pre-terminal" id="pre-marketing"></pre>
+          <button class="btn btn--secondary" type="button" id="try-marketing-btn-click">
+            Try It
+          </button>
+        </div>
+      </div>
+
+      <div class="card" id="video-card">
+        <consent-guard consent="analytics+marketing" id="video-guard">
+          <iframe class="video" data-src="https://www.youtube.com/embed/O8yypD7RiJU"
+            title="Funniest Super Bowl Commercial 2008 Bridgestone" loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </consent-guard>
+        <consent-missing for="video-guard">
+          <div class="video--consent-missing">
+            Please accept analytics cookies and marketing cookies to view this content.
+          </div>
+        </consent-missing>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer__text">
+        This is a demonstration of PrivacyKit Consent Management. Return to the PrivacyKit website <a
+          class="footer__link" href="https://www.privacykit.eu">here</a>.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./index.js"></script>
+
+</body>
+
+</html>
