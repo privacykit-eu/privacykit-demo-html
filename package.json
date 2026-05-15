@@ -1,0 +1,19 @@
+{
+  "name": "privacykit-demo-html",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Demo page showcasing PrivacyKit Consent Dialog and consent-guard usage with plain HTML/CSS/JS.",
+  "scripts": {
+    "test": "echo \"(no tests)\"",
+    "start": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/privacykit-eu/privacykit-demo-html.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/privacykit-eu/privacykit-demo-html/issues"
+  },
+  "homepage": "https://github.com/privacykit-eu/privacykit-demo-html#readme"
+}
